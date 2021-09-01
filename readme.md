@@ -5,7 +5,7 @@
 For the MSc project: Machine Learning for DNA storage. 
 
 Code modified from: https://github.com/lvxuan96/CATCaller
-The code can be installed or a read-to-use vesion is directly availble on Imperial doc servers.
+The code can be installed or a ready-to-use vesion is directly availble on Imperial doc servers.
 
 
 
@@ -13,7 +13,7 @@ Repository oragnisation:
 * CATCaller_master: contains the basecaller. 
 * scripts: various python files and notebooks for tests or data manipulation
 * performance: compute the performance of the basecaller
-* commands_preprocess.txt: example commands to create the dataset from fitlered fast5 fast5 reads (need to change paths to be used)
+* commands_preprocess.txt: example commands to create the train dataset from filtered fast5 reads (need to change some paths to be used)
 
 
 
@@ -21,8 +21,8 @@ Repository oragnisation:
 
 ### Installation
 
-We had the network work with cuda 11.1.0-cudnn8.0.4.30
-The commands create a new conda env and install the necessary packages
+We had the network work with cuda 11.1.0-cudnn8.0.4.30.
+Bellow are the commands to create a new conda env and install the necessary packages
 
 
 ```angular2
@@ -40,7 +40,7 @@ conda env update --file ./requirements/environment.yaml --prune
 
 
 
-If the Imeprial servers with slurm is inteded to be used. run install_dynamicconv.sh with sbatch from the dynamicconv_layer folder (it should use cuda 11.1.0-cudnn8.0.4.30), Careful: change the appropriate paths in the .sh file. The lines to modidy are indicated.
+If the Imeprial servers with slurm is inteded to be used, run install_dynamicconv.sh with sbatch from the dynamicconv_layer folder (it should use cuda 11.1.0-cudnn8.0.4.30), Careful: change the appropriate paths in the .sh file. The lines to modidy are indicated.
 ```angular2
 cd dynamicconv_layer
 sbatch ./../requirements/install_dynamicconv.sh
@@ -61,14 +61,14 @@ cd ..
 
 
 ### Launch in inference mode
-Change the appropriate paths in the .sh file. The lines to modidy are indicated.
+Change the appropriate paths in the .sh files. The lines to modidy are indicated.
 From CATCaller_master:
 
 ```angular2
 bash run_caller_trim.sh <model file> <fast5 folder> 2048 <basecalled_dir>
 ```
 
-`model file`: are stored unde CATCaller_master/model/ Use fine-tuned.chkpt for the fine-tuned version and model.2048.chkpt for the original one.   
+`model file`: are stored under CATCaller_master/model/ Use fine-tuned.chkpt for the fine-tuned version or model.2048.chkpt for the original one.   
 `fast5 folder`: directory of fast5 files. Inside the directory, there cannot be fast5 files directly but folders containing fast5 files. The files must be multi-fast5 files. If that is not the case, use https://github.com/nanoporetech/ont_fast5_api   
 `basecalled_dir`: the output directory that will host the results.   
 
@@ -83,7 +83,7 @@ sbatch run_caller_slurm.sh <model file> <fast5 folder> 2048 <basecalled_dir>
 ```
 
 To try directly to use the basecaller on doc servers
-The basecalled result will appear in /vol/bitbucket/vt520/demo/results
+The basecalled results will appear in /vol/bitbucket/vt520/demo/results
 ```angular2
 ssh gpucluster.doc.ic.ac.uk
 cd /vol/bitbucket/vt520/demo/
@@ -121,7 +121,7 @@ sbatch ./../../CATCaller_master/train_litetr_slurm.sh ./../../data/3XR6/datasets
 ./../../CATCaller_master/model/model.2048.chkpt
 ```
 
-During fine-tuning, info_train.log allows to see the progress
+During fine-tuning, info_train.log allows to see the progress.
 
 
 
