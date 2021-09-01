@@ -186,7 +186,14 @@ def apply_time_freq_mask(input_sig, chunk_size = 10, num_masks_freq=1, num_masks
     
     return y
 
-
+'''from catcaller to impede ctc infinite loss'''
+def cal_repeat_seqlen(seq):
+        seq_len=len(seq)
+        add_len=0
+        for i in range(len(seq)-1):
+            if seq[i] == seq[i+1]:
+                add_len += 1
+        return seq_len+add_len
 
 
 '''Randomly choose number of masks then augment a signal and pad it'''
@@ -206,7 +213,16 @@ def get_augmented_sig(raw_sig_no_pad):
         augmented_sig = apply(raw_sig_no_pad, num_masks=num_masks)
         augmented_sig = np.pad( augmented_sig, (0, WIN_SIZE-len(augmented_sig)),
                                     mode='constant', constant_values=SIG_PAD )
-        return augmented_sig
+        add_seq_len=cal_repeat_seqlen(augmented_sig)
+        out_raw_len = len(augmented_sig) // 4
+        if out_raw_len <= add_seq_len:
+            # ctc infinite loss
+            sig_pad = np.pad( raw_sig_no_pad, (0, WIN_SIZE-len(raw_sig_no_pad)),
+                                    mode='constant', constant_values=SIG_PAD )
+            return sig_pad
+        else:
+            return augmented_sig
+        
     
     except:
         print("len augmented sig ", len(augmented_sig))
