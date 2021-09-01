@@ -1,0 +1,18 @@
+pip install ninja 
+pip install fast-ctc-decode
+run install_dynamicconv.sh with sbatch from the dynamicconv_layer folder (use cuda 11.1.0-cudnn8.0.4.30)
+use the corrected requirerment yml file
+
+pip install --no-cache-dir tensorflow-gpu==1.13.2 (or use other temporary dic)
+
+git clone --recursive https://github.com/parlance/ctcdecode.git
+cd ctcdecode && pip install .
+
+
+### WARINING
+When launching CATCaller, make sure beforehand that no conda environment is activated
+
+
+
+
+

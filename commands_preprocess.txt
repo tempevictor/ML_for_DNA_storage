@@ -1,0 +1,26 @@
+** Convert multi to single fast5 format (with [FOLD] in {1a-42k, 2b-42k, 3d-42k}): **
+multi_to_single_fast5 -i /media/victor/USB/MSc_basecall/Data/3XR6/fast5s/fast5s_filtered_long/2b-42k/ -s /media/victor/USB/MSc_basecall/Data/3XR6/fast5s/fast5s_filtered_long_resquiggle2048/single/[FOLD]/ --recursive
+
+
+** Annotate with fastq (with [FOLD] in {1a-42k, 2b-42k, 3d-42k}): **
+tombo preprocess annotate_raw_with_fastqs --fast5-basedir /media/victor/USB/MSc_basecall/Data/3XR6/fast5s/fast5s_filtered_long_resquiggle2048/single/3d-42k/ --fastq-filenames /media/victor/USB/MSc_basecall/Data/3XR6/guppy/guppy_filtered_long/fastq/[FOLD]/out.fastq --overwrite
+
+
+** Resquiggle: **
+tombo resquiggle /media/victor/USB/MSc_basecall/Data/3XR6/fast5s/fast5s_filtered_long_resquiggle2048/ /media/victor/USB/MSc_basecall/Data/3XR6/ref_3xr6/reference_full.fasta --overwrite
+
+
+** Split into train and test folders (with [FOLD] in {1a-42k, 2b-42k, 3d-42k}): **
+python /media/victor/USB/MSc_basecall/prgm/split_f5_train_test.py /media/victor/USB/MSc_basecall/Data/3XR6/fast5s/fast5s_filtered_long_resquiggle2048/single/1a-42k/ /media/victor/USB/MSc_basecall/Data/3XR6/datasets/dataset_resquiggle_2048/fast5s_single/[FOLD]/
+*The merge the train and test files together under the same diectories*
+
+
+** Prepare npy files with data and label for training: **
+python train_data.py -i ./../../Data/3XR6/datasets/dataset_resquiggle_2048/fast5s_single/train/ -so ./../../Data/3XR6/datasets/dataset_resquiggle_2048/signal_output_train/ -lo ./../../Data/3XR6/datasets/dataset_resquiggle_2048/label_output_train/ -raw_len 2048 -seq_len 300
+
+
+
+
+
+
+

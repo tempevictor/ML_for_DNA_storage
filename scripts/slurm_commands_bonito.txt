@@ -1,0 +1,49 @@
+RUN SCRIPT
+
+# connect to ssh
+ssh vt520@shell3.doc.ic.ac.uk
+
+# use appropriate cuda version
+. /vol/cuda/10.2.89-cudnn7.6.4.38/setup.sh
+
+#connect the slurm controller
+ssh gpucluster.doc.ic.ac.uk
+
+# go to personal folder
+cd /vol/bitbucket/vt520/
+
+# make script executable
+chmod +x <script_name>.sh
+
+# run script with gpu
+sbatch my_script.sh
+
+
+UTILS
+# see jobs
+squeue
+
+#output directory where the command was invoked
+
+#copy data
+#### DO IT FROM LOCAL TERMINAL and use scp
+#local to remote
+scp -r /media/victor/USB/MSc_basecall/Data/3XR6/fast5s_filtered_short vt520@shell3.doc.ic.ac.uk:/vol/bitbucket/vt520/data/3XR6/
+# remote to local
+scp -r vt520@shell3.doc.ic.ac.uk:/vol/bitbucket/vt520/data/3XR6/fastas_filtered_long_slurm /media/victor/USB/MSc_basecall/Data/3XR6/
+
+
+# connect to ssh
+ssh vt520@shell3.doc.ic.ac.uk
+
+
+# use appropriate cuda version
+. /vol/cuda/10.2.89-cudnn7.6.4.38/setup.sh
+
+#connect the slurm controller
+ssh gpucluster.doc.ic.ac.uk
+
+# go to personal folder
+cd /vol/bitbucket/vt520/
+
+
