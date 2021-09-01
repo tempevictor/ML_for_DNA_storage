@@ -1,6 +1,6 @@
 
-# ML for DNA storage
-#### Victor Tempe
+# ML for DNA storage (Victor Tempe)
+## Imperial College
 
 For the MSc project: Machine Learning for DNA storage. 
 
