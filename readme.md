@@ -1,5 +1,7 @@
 
-# CATCaller
+# ML for DNA storage
+#### Victor Tempe
+
 For the MSc project: Machine Learning for DNA storage. 
 
 Code modified from: https://github.com/lvxuan96/CATCaller
@@ -34,7 +36,7 @@ cd ..
 conda env update --file ./requirements/environment.yaml --prune
 ```
 
-```
+
 
 If the Imeprial servers with slurm is inteded to be used. run install_dynamicconv.sh with sbatch from the dynamicconv_layer folder (it should use cuda 11.1.0-cudnn8.0.4.30), Careful: change the apropriate paths in the file
 ```angular2
